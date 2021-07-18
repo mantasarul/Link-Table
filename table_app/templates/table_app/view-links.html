@@ -1,0 +1,21 @@
+{% extends 'table_app/base.html' %}
+
+{% block title %}View Links{% endblock %}
+
+{% block content %}
+    <h1>View Links</h1>
+    <table>
+        <tr>
+            <th>Link ID</th>
+            <th>Category ID</th>
+            <th>Links</th>
+        </tr>
+        {% for link in object_list %}
+            <tr>
+                <td>{{ link.id }}</td>
+                <td>{{ link.category_id }}</td>
+                <td>{{ link.link_name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
