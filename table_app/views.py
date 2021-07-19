@@ -29,6 +29,7 @@ class AddCategoryView(CreateView):
 #         form.save()
 #         return super().form_valid(form)
 
+
 # class AddCategoryView(View):
 #     def get(self, request):
 #         form = CategoryForm()
