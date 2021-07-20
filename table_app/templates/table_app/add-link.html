@@ -1,12 +1,52 @@
 {% extends 'table_app/base.html' %}
-
+{% load static %}
 {% block title %}Add Link{% endblock %}
 
 {% block content %}
-    <h1>Add Link</h1>
+    {% comment %} <h1>Add Link</h1>
     <form action="" method='POST'>
         {% csrf_token %}
         {{ form }}
         <button type='submit'>Submit</button>
-    </form>
+    </form> {% endcomment %}
+
+<!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add Link</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form  action="" method='POST'>
+                <div class="card-body">
+                  {% comment %} <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  </div> {% endcomment %}
+                   {% csrf_token %}
+                    {{ form }}
+                    <button type='submit'>Submit</button>
+                  
+                  
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+
+
+
 {% endblock content %}

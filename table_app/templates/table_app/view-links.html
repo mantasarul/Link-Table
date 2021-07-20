@@ -1,10 +1,10 @@
 {% extends 'table_app/base.html' %}
-
+{% load static %}
 {% block title %}View Links{% endblock %}
 
 {% block content %}
     <h1>View Links</h1>
-    <table>
+    {% comment %} <table>
         <tr>
             <th>Link ID</th>
             <th>Category ID</th>
@@ -22,5 +22,53 @@
                 </td>
             </tr>
         {% endfor %}
-    </table>
+    </table> {% endcomment %}
+
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                {% comment %} <h3 class="card-title">List of all available categories</h3> {% endcomment %}
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Link ID</th>
+                    <th>Category ID</th>
+                    <th>Links</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                 
+                {% for link in object_list %}
+                    <tr>
+                        <td>{{ link.id }}</td>
+                        <td>{{ link.category_id }}</td>
+                        <td>{{ link.link_name }}</td>
+                        <td>
+                        <a class="btn btn-warning" href="/edit-link/{{ link.id }}">Edit</a>
+                        <a class="btn btn-danger" href="/delete-link/{{ link.id }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                 
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+
+
 {% endblock content %}

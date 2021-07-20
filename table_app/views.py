@@ -77,7 +77,9 @@ class DeleteCategoryView(View):
     def get(self, request, id):
         category = Category.objects.get(id=id)
         return render(request, 'table_app/delete-category.html', {
-            'id': id
+            # 'id': id
+            'category': category.category_name
+
         })
 
     def post(self, request, id):
@@ -90,7 +92,8 @@ class DeleteLinkView(View):
     def get(self, request, id):
         link = Link.objects.get(id=id)
         return render(request, 'table_app/delete-link.html', {
-            'id':id
+            # 'id':id
+            'link': link.link_name
         })
 
     def post(self, request, id):
