@@ -9,12 +9,17 @@
             <th>Link ID</th>
             <th>Category ID</th>
             <th>Links</th>
+            <th>Actions</th>
         </tr>
         {% for link in object_list %}
             <tr>
                 <td>{{ link.id }}</td>
                 <td>{{ link.category_id }}</td>
                 <td>{{ link.link_name }}</td>
+                <td>
+                <a href="/edit-link/{{ link.id }}"">Edit</a>
+                <a href="/delete-link/{{ link.id }}">Delete</a>
+                </td>
             </tr>
         {% endfor %}
     </table>
