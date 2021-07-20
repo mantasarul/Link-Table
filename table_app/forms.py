@@ -11,7 +11,7 @@ class CategoryForm(forms.ModelForm):
             'category_name': 'Category Name'
         }
         widgets = {
-            'fields': forms.TextInput(attrs={'class': 'myfieldclass'}),
+            'category_name': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 
@@ -22,4 +22,8 @@ class AddLinkForm(forms.ModelForm):
         labels = {
             'link_name': 'Link',
             'category_id': 'Category ID'
+        }
+        widgets = {
+            'link_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'category_id': forms.Select(attrs={'class': 'form-control'}),
         }
