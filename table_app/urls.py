@@ -10,8 +10,8 @@ urlpatterns = [
     # path('delete-category/<int:id>', views.deleteCategory),
     path('delete-category/<int:id>', views.DeleteCategoryView.as_view()),
     # path('edit-category/<int:id>', views.editCategory),
-    # path('edit-category/<int:id>', views.EditCategoryView.as_view()),
-    path('<pk>/update', views.EditCategoryView.as_view(), name='update-category'),
+    path('edit-category/<pk>', views.EditCategoryView.as_view(), name='update-category'),
+    # path('<pk>/update', views.EditCategoryView.as_view(), name='update-category'),
     path('delete-link/<int:id>', views.DeleteLinkView.as_view()),
     path('edit-link/<int:id>', views.editLink),
 
