@@ -51,8 +51,10 @@
                         <td>{{ link.category_id }}</td>
                         <td>{{ link.link_name }}</td>
                         <td>
-                        <a class="btn btn-warning" href="/edit-link/{{ link.id }}">Edit</a>
-                        <a class="btn btn-danger" href="/delete-link/{{ link.id }}">Delete</a>
+                        <a class="btn btn-warning" href="{% url 'update-link' link.id %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'delete-link' link.id %}">Delete</a>
+                        {% comment %} <a class="btn btn-danger" href="/delete-link/{{ link.id }}">Delete</a> {% endcomment %}
+
                         </td>
                     </tr>
                 {% endfor %}

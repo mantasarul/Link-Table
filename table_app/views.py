@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.base import TemplateView, View
-from django.views.generic.edit import CreateView, FormView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 from django.views.generic.list import ListView
 
 from .forms import AddLinkForm, CategoryForm
@@ -18,6 +18,50 @@ class AddCategoryView(CreateView):
     form_class = CategoryForm
     template_name = 'table_app/add-category.html'
     success_url = 'all-categories'
+
+
+class AddLinkView(CreateView):
+    model = Link
+    form_class = AddLinkForm
+    template_name = 'table_app/add-link.html'
+    success_url = 'all-links'
+
+
+class AllCategoriesView(ListView):
+    template_name = 'table_app/view-categories.html'
+    model = Category
+
+
+class AllLinksView(ListView):
+    template_name = 'table_app/view-links.html'
+    model = Link
+
+
+class DeleteCategoryView(DeleteView):
+    model = Category
+    success_url = '/all-categories'
+    # if template_name not provided, the default template name would be:
+    # category_confirm_delete.html
+
+
+class DeleteLinkView(DeleteView):
+    model = Link
+    template_name = 'table_app/delete-link.html'
+    success_url = '/all-links'
+
+
+class EditCategoryView(UpdateView):
+    model = Category
+    template_name = 'table_app/edit-category.html'
+    fields = ['category_name']
+    success_url = '/all-categories'
+
+
+class EditLinkView(UpdateView):
+    model = Link
+    template_name = 'table_app/edit-link.html'
+    fields = ['link_name', 'category_id']
+    success_url = '/all-links'
 
 
 # class AddCategoryView(FormView):
@@ -50,56 +94,38 @@ class AddCategoryView(CreateView):
 #         })
 
 
-class AddLinkView(CreateView):
-    model = Link
-    form_class = AddLinkForm
-    template_name = 'table_app/add-link.html'
-    success_url = 'all-links'
-
-
-class AllCategoriesView(ListView):
-    template_name = 'table_app/view-categories.html'
-    model = Category
-
-
-class AllLinksView(ListView):
-    template_name = 'table_app/view-links.html'
-    model = Link
-
-
 # def deleteCategory(request, id):
 #     category = Category.objects.get(id=id)
 #     category.delete()
 #     return redirect("/all-categories")
 
 
-class DeleteCategoryView(View):
-    def get(self, request, id):
-        category = Category.objects.get(id=id)
-        return render(request, 'table_app/delete-category.html', {
-            # 'id': id
-            'category': category.category_name
+# class DeleteCategoryView(View):
+#     def get(self, request, id):
+#         category = Category.objects.get(id=id)
+#         return render(request, 'table_app/delete-category.html', {
+#             # 'id': id
+#             'category': category.category_name
+#         })
 
-        })
-
-    def post(self, request, id):
-        category = Category.objects.get(id=id)
-        category.delete()
-        return HttpResponseRedirect('/all-categories')
+#     def post(self, request, id):
+#         category = Category.objects.get(id=id)
+#         category.delete()
+#         return HttpResponseRedirect('/all-categories')
 
 
-class DeleteLinkView(View):
-    def get(self, request, id):
-        link = Link.objects.get(id=id)
-        return render(request, 'table_app/delete-link.html', {
-            # 'id':id
-            'link': link.link_name
-        })
+# class DeleteLinkView(View):
+#     def get(self, request, id):
+#         link = Link.objects.get(id=id)
+#         return render(request, 'table_app/delete-link.html', {
+#             # 'id':id
+#             'link': link.link_name
+#         })
 
-    def post(self, request, id):
-        link = Link.objects.get(id=id)
-        link.delete()
-        return HttpResponseRedirect('/all-links')
+#     def post(self, request, id):
+#         link = Link.objects.get(id=id)
+#         link.delete()
+#         return HttpResponseRedirect('/all-links')
 
 
 # def editCategory(request, id):
@@ -113,13 +139,6 @@ class DeleteLinkView(View):
 #     return render(request, 'table_app/add-category.html', {
 #         'form': form
 #     })
-
-
-class EditCategoryView(UpdateView):
-    model = Category
-    template_name = 'table_app/edit-category.html'
-    fields = ['category_name']
-    success_url = '/all-categories'
 
 
 # class EditCategoryView(View):
@@ -144,14 +163,14 @@ class EditCategoryView(UpdateView):
 #         })
 
 
-def editLink(request, id):
-    instance = get_object_or_404(Link, id=id)
-    form = AddLinkForm(request.POST or None, instance=instance)
+# def editLink(request, id):
+#     instance = get_object_or_404(Link, id=id)
+#     form = AddLinkForm(request.POST or None, instance=instance)
 
-    if form.is_valid():
-        form.save()
-        return redirect("/all-links")
+#     if form.is_valid():
+#         form.save()
+#         return redirect("/all-links")
 
-    return render(request, 'table_app/add-link.html', {
-        'form': form
-    })
+#     return render(request, 'table_app/add-link.html', {
+#         'form': form
+#     })

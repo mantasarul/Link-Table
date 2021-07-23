@@ -51,7 +51,8 @@
                         {% comment %} <a class="btn btn-warning" href="{{ category.id }}/update">Edit</a> {% endcomment %}
                         {% comment %} <a class="btn btn-warning" href="edit-category/{{ category.id }}">Edit</a> {% endcomment %}
                         <a class="btn btn-warning" href="{% url 'update-category' category.id %}">Edit</a>
-                        <a class="btn btn-danger" href="/delete-category/{{ category.id }}">Delete</a>
+                        {% comment %} <a class="btn btn-danger" href="/delete-category/{{ category.id }}">Delete</a> {% endcomment %}
+                        <a class="btn btn-danger" href="{% url 'delete-category' category.id %}">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}
