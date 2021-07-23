@@ -48,7 +48,7 @@
                         <td>{{ category.id }}</td>
                         <td>{{ category.category_name }}</td>
                         <td>
-                        <a class="btn btn-warning" href="/edit-category/{{ category.id }}">Edit</a>
+                        <a class="btn btn-warning" href="{{ category.id }}/update">Edit</a>
                         <a class="btn btn-danger" href="/delete-category/{{ category.id }}">Delete</a>
                         </td>
                     </tr>

@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.base import TemplateView, View
-from django.views.generic.edit import CreateView, FormView
+from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.views.generic.list import ListView
 
 from .forms import AddLinkForm, CategoryForm
@@ -102,17 +102,24 @@ class DeleteLinkView(View):
         return HttpResponseRedirect('/all-links')
 
 
-def editCategory(request, id):
-    instance = get_object_or_404(Category, id=id)
-    form = CategoryForm(request.POST or None, instance=instance)
+# def editCategory(request, id):
+#     instance = get_object_or_404(Category, id=id)
+#     form = CategoryForm(request.POST or None, instance=instance)
 
-    if form.is_valid():
-        form.save()
-        return redirect("/all-categories")
+#     if form.is_valid():
+#         form.save()
+#         return redirect("/all-categories")
 
-    return render(request, 'table_app/add-category.html', {
-        'form': form
-    })
+#     return render(request, 'table_app/add-category.html', {
+#         'form': form
+#     })
+
+
+class EditCategoryView(UpdateView):
+    model = Category
+    template_name = 'table_app/edit-category.html'
+    fields = ['category_name']
+    success_url = '/all-categories'
 
 
 # class EditCategoryView(View):
